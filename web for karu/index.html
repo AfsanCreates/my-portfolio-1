@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Display with Animation</title>
+  <style>
+    /* Reset margin and padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Full-page container */
+    body, html {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #2c2c2c;
+    }
+
+    /* Loading spinner */
+    .loading {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    /* Animation for spinning */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Responsive image styling */
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      max-width: 100vw;
+      max-height: 100vh;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    /* After the image loads, make it visible */
+    img.loaded {
+      opacity: 1;
+    }
+
+    /* Additional styling for full-screen, responsive view */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="loading" id="loading"></div>
+  <img src="your-image-path.png" alt="Image" id="image"> <!-- Replace with your image path -->
+
+  <script>
+    const image = document.getElementById('image');
+    const loading = document.getElementById('loading');
+
+    // Wait for the image to load
+    image.onload = () => {
+      // Remove loading spinner and show the image with transition
+      loading.style.display = 'none';
+      image.classList.add('loaded');
+    };
+
+    // Show loading spinner until image is fully loaded
+    image.src = 'blank.pdf.png';  // Replace with your image path
+
+  </script>
+</body>
+</html>
